@@ -1,14 +1,3 @@
-# UPV Inter-Slice Connectivity Demonstration
-
-Project: Imagine (https://www.notion.so/Imagine-7086dc437a4f44f4b49336b275434f51?pvs=21)
-Author: Rafael Direito
-NoteType: Wiki
-Creation Time: June 27, 2025 12:23 PM
-Last Edited Time: June 27, 2025 6:06 PM
-❤️: No
-Status: Inbox
-Archived: No
-
 # IMAGINE-B5G ITAv-UPV Inter-Domain Network Slice Orchestration
 
 For achieving an inter-domain network slice between ITAv and UPV, we rely on a VPN link between the two facilities. The orchestration of this VPN link relies on 3 core modules/components:
@@ -18,10 +7,6 @@ For achieving an inter-domain network slice between ITAv and UPV, we rely on a V
 - A cronjob that continuously checks if a VM in UPV’s domain is reachable
 
 ## 1. OpenVPN Service
-
-[upv_vpn_aveiro.zip](UPV%20Inter-Slice%20Connectivity%20Demonstration%2021f11fa2ed8d80168a1be6b713a38101/upv_vpn_aveiro.zip)
-
-[UPV testbed access - Guidelines.pdf](UPV%20Inter-Slice%20Connectivity%20Demonstration%2021f11fa2ed8d80168a1be6b713a38101/UPV_testbed_access_-_Guidelines.pdf)
 
 The configuration of OpenVPN requires installing openvpn and placing the configuration files under `/etc/openvpn/`. If the config file is named `upv_vpn_aveiro.conf`, the VPN link can be started with: `systemctl start openvpn@upv_vpn_aveiro` .
 
@@ -52,7 +37,7 @@ Afterwards, a service was created to run the API when the VM boots, thus ensurin
 
 Contents of `/etc/systemd/system/vpn-api.service` :
 
-```bash
+```ini
 [Unit]
 Description=FastAPI VPN Control API
 After=network.target
@@ -93,7 +78,7 @@ Afterwards, we proceeded with the implementation of a systemd service to run our
 
 Contents of `/etc/systemd/system/vpn-status-check.service`:
 
-```bash
+```ini
 [Unit]
 Description=Check VPN status and update status file
 
@@ -106,7 +91,7 @@ Then we proceed with the creation of a systemd timer, to invoke the just created
 
 Contents of `/etc/systemd/system/vpn-status-check.timer`:
 
-```bash
+```ini
 [Unit]
 Description=Run VPN status check every 10 seconds
 
