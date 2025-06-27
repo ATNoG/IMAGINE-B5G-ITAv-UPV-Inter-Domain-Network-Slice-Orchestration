@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "82d1d214-64f6-4e78-851a-271bee956d0d",
+		"name": "IMAGINE - UPV VPN Control API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7243327",
+		"_collection_link": "https://gasp-atnog.postman.co/workspace/5GASP~b6b71cda-8508-4768-b638-ac160cba49dd/collection/7243327-82d1d214-64f6-4e78-851a-271bee956d0d?action=share&source=collection_link&creator=7243327"
+	},
+	"item": [
+		{
+			"name": "Start VPN",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/vpn/start",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vpn",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stop VPN",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/vpn/stop",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vpn",
+						"stop"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get VPN Status",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "{{password}}",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "{{username}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/vpn/status",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"vpn",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

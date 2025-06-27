@@ -1,0 +1,39 @@
+1.Place the script at /usr/local/bin/vpn_status_check.py and make it executable:
+
+sudo mv vpn_status_cron.py /usr/local/bin/vpn_status_check.py
+sudo chmod +x /usr/local/bin/vpn_status_check.py
+
+2. Create the service file /etc/systemd/system/vpn-status-check.service
+
+[Unit]
+Description=Check VPN status and update status file
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/vpn_status_check.py
+
+3. Create the timer file /etc/systemd/system/vpn-status-check.timer
+
+[Unit]
+Description=Run VPN status check every 10 seconds
+
+[Timer]
+OnBootSec=10
+OnUnitActiveSec=10
+AccuracySec=1s
+Unit=vpn-status-check.service
+
+[Install]
+WantedBy=timers.target
+
+4. Enable and start the timer
+
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl enable --now vpn-status-check.timer
+
+5. To check if it's working:
+
+systemctl list-timers --all | grep vpn-status-check
+
+

@@ -1,0 +1,36 @@
+REQUIREMENTS SHOULD BE INSTALLED ON THE HOST VM (be careful with the user you use to install the requirements)
+
+1.Place the script at /usr/local/bin/vpn_status_check.py and make it executable:
+
+sudo cp main.py /usr/local/bin/vpn_status_api.py
+sudo chmod +x /usr/local/bin/vpn_status_api.py
+
+2. Create the service file /etc/systemd/system/vpn-api.service
+
+[Unit]
+Description=FastAPI VPN Control API
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/local/bin
+ExecStart=/usr/bin/python3 -m uvicorn vpn_status_api:app --host 0.0.0.0 --port 8000 --app-dir /usr/local/bin
+Environment=API_USERNAME=admin
+Environment=API_PASSWORD=secret
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+
+3. Enable and start the service
+
+sudo systemctl daemon-reload
+sudo systemctl enable --now vpn-api.service
+
+
+5. To check if it's working:
+
+sudo systemctl status vpn-api.service
+sudo journalctl -u vpn-api.service -f
+
